@@ -16,10 +16,10 @@ form.addEventListener("submit", handelSubmit);
 
 function handelSubmit(event) {
     event.preventDefault();
+     gallery.innerHTML = "";
     const dataSearch = event.currentTarget.elements.data.value.trim();
     if (dataSearch === "") {
-        gallery.innerHTML = "";
-        return iziToast.error({
+            return iziToast.error({
             message: "Sorry, there are no images matching your search query. Please try again!",
              position: "topRight"
             });
@@ -29,7 +29,6 @@ function handelSubmit(event) {
         .then(data => {
             if (data.hits.length === 0) {
                 hideLoading(loader);
-                gallery.innerHTML = "";
                 return iziToast.error({
                     message: "Sorry, there are no images matching your search query. Please try again!",
                  position: "topRight"
