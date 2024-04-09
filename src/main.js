@@ -12,9 +12,9 @@ const form = document.querySelector(".search-form");
 const gallery = document.querySelector(".gallery");
 const loader = document.querySelector(".loading-indicator");
 
-form.addEventListener("submit", handelSubmit);
+form.addEventListener("submit", handleSubmit);
 
-function handelSubmit(event) {
+function handleSubmit(event) {
     event.preventDefault();
      gallery.innerHTML = "";
     const dataSearch = event.currentTarget.elements.data.value.trim();
@@ -24,7 +24,7 @@ function handelSubmit(event) {
              position: "topRight"
             });
     };
-    showLoading(loader);
+     showLoading(loader);
     createRequest(dataSearch)
         .then(data => {
             if (data.hits.length === 0) {
@@ -34,7 +34,8 @@ function handelSubmit(event) {
                  position: "topRight"
                 })
             }
-            hideLoading(loader);
+            form.reset();
+           
             gallery.innerHTML = createGallery(data.hits);
             lightboxGallery.refresh();
         })
@@ -44,7 +45,8 @@ function handelSubmit(event) {
             });
         })
         .finally(() => {
-            form.reset();
+           
+             hideLoading(loader);
     })
 }
 
